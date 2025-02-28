@@ -54,7 +54,7 @@ export const formatMoneyRange = (moneyFrom: IMoney, moneyTo: IMoney, locale: str
 
     // TODO: remove casting from formatRange when typescript
     // is updated to 4.7 or higher
-    return formattedMoneyRange;
+    return formattedMoneyRange.replace("–", "-");
   } catch (error) {
     const formattedMoneyFrom = formatMoney(moneyFrom, locale);
     const formattedMoneyTo = formatMoney(moneyTo, locale);
