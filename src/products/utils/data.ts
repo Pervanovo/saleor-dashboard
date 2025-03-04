@@ -18,6 +18,7 @@ import {
 import { FormsetAtomicData } from "@dashboard/hooks/useFormset";
 import { maybe } from "@dashboard/misc";
 import { mapEdgesToItems, mapMetadataItemToInput } from "@dashboard/utils/maps";
+import { getMetadataValueAsBool } from "@dashboard/utils/metadata/getMetadataValue";
 import { Option } from "@saleor/macaw-ui-next";
 import moment from "moment";
 
@@ -48,6 +49,10 @@ export function getAttributeInputFromProduct(product: ProductFragment): Attribut
         entityType: attribute.attribute.entityType,
         inputType: attribute.attribute.inputType,
         isRequired: attribute.attribute.valueRequired,
+        allowCustomValues: getMetadataValueAsBool(
+          attribute.attribute.metadata,
+          "allowCustomValues",
+        ),
         selectedValues: attribute.values,
         values: mergeChoicesWithValues(attribute),
         unit: attribute.attribute.unit,
@@ -81,6 +86,7 @@ export function getAttributeInputFromProductType(productType: ProductType): Attr
       entityType: attribute.entityType,
       inputType: attribute.inputType,
       isRequired: attribute.valueRequired,
+      allowCustomValues: getMetadataValueAsBool(attribute.metadata, "allowCustomValues"),
       values: mapEdgesToItems(attribute.choices) || [],
       unit: attribute.unit,
     },
@@ -99,6 +105,7 @@ export function getAttributeInputFromAttributes(
       entityType: attribute.entityType,
       inputType: attribute.inputType,
       isRequired: attribute.valueRequired,
+      allowCustomValues: getMetadataValueAsBool(attribute.metadata, "allowCustomValues"),
       values: mapEdgesToItems(attribute.choices) || [],
       unit: attribute.unit,
       variantAttributeScope,
@@ -118,6 +125,7 @@ export function getAttributeInputFromSelectedAttributes(
       entityType: attribute.attribute.entityType,
       inputType: attribute.attribute.inputType,
       isRequired: attribute.attribute.valueRequired,
+      allowCustomValues: getMetadataValueAsBool(attribute.attribute.metadata, "allowCustomValues"),
       selectedValues: attribute.values,
       values: mergeChoicesWithValues(attribute),
       unit: attribute.attribute.unit,
