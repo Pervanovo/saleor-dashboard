@@ -2,7 +2,6 @@ import "@saleor/macaw-ui-next/style";
 import "./index.css";
 
 import { ApolloProvider } from "@apollo/client";
-import DemoBanner from "@dashboard/components/DemoBanner";
 import { history, Route, Router } from "@dashboard/components/Router";
 import { extensionsSection } from "@dashboard/extensions/urls";
 import { PermissionEnum } from "@dashboard/graphql";
@@ -11,32 +10,25 @@ import { ThemeProvider } from "@dashboard/theme";
 import { OnboardingProvider } from "@dashboard/welcomePage/WelcomePageOnboarding/onboardingContext";
 import { ThemeProvider as LegacyThemeProvider } from "@saleor/macaw-ui";
 import { SaleorProvider } from "@saleor/sdk";
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { render } from "react-dom";
 import { ErrorBoundary } from "react-error-boundary";
 import TagManager from "react-gtm-module";
 import { useIntl } from "react-intl";
 import { Switch } from "react-router-dom";
 
-import { AppsSectionRoot } from "./apps";
 import { ExternalAppProvider } from "./apps/components/ExternalAppContext";
 import { AppSections } from "./apps/urls";
-import AttributeSection from "./attributes";
 import { attributeSection } from "./attributes/urls";
-import Auth from "./auth";
 import AuthProvider from "./auth/AuthProvider";
 import LoginLoading from "./auth/components/LoginLoading/LoginLoading";
 import SectionRoute from "./auth/components/SectionRoute";
 import { useAuthRedirection } from "./auth/hooks/useAuthRedirection";
-import CategorySection from "./categories";
-import ChannelsSection from "./channels";
 import { channelsSection } from "./channels/urls";
-import CollectionSection from "./collections";
 import AppLayout from "./components/AppLayout";
 import useAppChannel, { AppChannelProvider } from "./components/AppLayout/AppChannelContext";
 import { DateProvider } from "./components/Date";
 import { DevModeProvider } from "./components/DevModePanel/DevModeProvider";
-import ErrorPage from "./components/ErrorPage";
 import ExitFormDialogProvider from "./components/Form/ExitFormDialogProvider";
 import { LocaleProvider } from "./components/Locale";
 import MessageManagerProvider from "./components/messages";
@@ -46,41 +38,60 @@ import { SavebarRefProvider } from "./components/Savebar/SavebarRefContext";
 import { ShopProvider } from "./components/Shop";
 import { WindowTitle } from "./components/WindowTitle";
 import { DEMO_MODE, GTM_ID } from "./config";
-import ConfigurationSection from "./configuration";
 import { getConfigMenuItemsPermissions } from "./configuration/utils";
 import AppStateProvider from "./containers/AppState";
 import BackgroundTasksProvider from "./containers/BackgroundTasks";
-import CustomAppsSection from "./custom-apps";
 import { CustomAppSections } from "./custom-apps/urls";
-import { CustomerSection } from "./customers";
-import DiscountSection from "./discounts";
-import { ExtensionsSection } from "./extensions";
 import { FeatureFlagsProviderWithUser } from "./featureFlags/FeatureFlagsProvider";
-import GiftCardSection from "./giftCards";
 import { giftCardsSectionUrlName } from "./giftCards/urls";
 import { apolloClient, saleorClient } from "./graphql/client";
 import { useLocationState } from "./hooks/useLocationState";
 import { commonMessages } from "./intl";
-import NavigationSection from "./navigation";
 import { navigationSection } from "./navigation/urls";
-import { NotFound } from "./NotFound";
-import OrdersSection from "./orders";
-import PageSection from "./pages";
-import PageTypesSection from "./pageTypes";
-import PermissionGroupSection from "./permissionGroups";
-import PluginsSection from "./plugins";
-import ProductSection from "./products";
-import ProductTypesSection from "./productTypes";
 import errorTracker from "./services/errorTracking";
-import ShippingSection from "./shipping";
-import SiteSettingsSection from "./siteSettings";
-import StaffSection from "./staff";
-import TaxesSection from "./taxes";
 import { paletteOverrides, themeOverrides } from "./themeOverrides";
-import TranslationsSection from "./translations";
-import WarehouseSection from "./warehouses";
 import { warehouseSection } from "./warehouses/urls";
-import { WelcomePage } from "./welcomePage";
+
+const DemoBanner = lazy(() => import("@dashboard/components/DemoBanner"));
+const AppsSectionRoot = lazy(() =>
+  import("./apps").then(module => ({
+    default: module.AppsSectionRoot,
+  })),
+);
+const Auth = lazy(() => import("./auth"));
+const AttributeSection = lazy(() => import("./attributes"));
+const CategorySection = lazy(() => import("./categories"));
+const ChannelsSection = lazy(() => import("./channels"));
+const CollectionSection = lazy(() => import("./collections"));
+const ConfigurationSection = lazy(() => import("./configuration"));
+const CustomerSection = React.lazy(() =>
+  import("./customers").then(module => ({ default: module.CustomerSection })),
+);
+const ErrorPage = lazy(() => import("./components/ErrorPage"));
+const CustomAppsSection = lazy(() => import("./custom-apps"));
+const WelcomePage = lazy(() =>
+  import("./welcomePage").then(module => ({ default: module.WelcomePage })),
+);
+const NotFound = lazy(() => import("./NotFound"));
+const DiscountSection = lazy(() => import("./discounts"));
+const GiftCardSection = lazy(() => import("./giftCards"));
+const NavigationSection = lazy(() => import("./navigation"));
+const OrdersSection = lazy(() => import("./orders"));
+const PageSection = lazy(() => import("./pages"));
+const PageTypesSection = lazy(() => import("./pageTypes"));
+const PermissionGroupSection = lazy(() => import("./permissionGroups"));
+const PluginsSection = lazy(() => import("./plugins"));
+const ProductSection = lazy(() => import("./products"));
+const ProductTypesSection = lazy(() => import("./productTypes"));
+const ShippingSection = lazy(() => import("./shipping"));
+const SiteSettingsSection = lazy(() => import("./siteSettings"));
+const StaffSection = lazy(() => import("./staff"));
+const TaxesSection = lazy(() => import("./taxes"));
+const TranslationsSection = lazy(() => import("./translations"));
+const WarehouseSection = lazy(() => import("./warehouses"));
+const ExtensionsSection = lazy(() =>
+  import("./extensions").then(module => ({ default: module.ExtensionsSection })),
+);
 
 if (GTM_ID) {
   TagManager.initialize({ gtmId: GTM_ID });
@@ -127,7 +138,9 @@ const App: React.FC = () => (
                                     <SavebarRefProvider>
                                       <FeatureFlagsProviderWithUser>
                                         <OnboardingProvider>
-                                          <Routes />
+                                          <Suspense fallback={<LoginLoading />}>
+                                            <Routes />
+                                          </Suspense>
                                         </OnboardingProvider>
                                       </FeatureFlagsProviderWithUser>
                                     </SavebarRefProvider>
