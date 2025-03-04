@@ -2750,8 +2750,10 @@ export const VariantAttributeFragmentDoc = gql`
   ) {
     ...AttributeValueList
   }
+  ...Metadata
 }
-    ${AttributeValueListFragmentDoc}`;
+    ${AttributeValueListFragmentDoc}
+${MetadataFragmentDoc}`;
 export const ProductVariantAttributesFragmentDoc = gql`
     fragment ProductVariantAttributes on Product {
   id
@@ -2772,6 +2774,7 @@ export const ProductVariantAttributesFragmentDoc = gql`
       ) {
         ...AttributeValueList
       }
+      ...Metadata
     }
     values {
       ...AttributeValueDetails
@@ -2792,6 +2795,7 @@ export const ProductVariantAttributesFragmentDoc = gql`
   }
 }
     ${AttributeValueListFragmentDoc}
+${MetadataFragmentDoc}
 ${AttributeValueDetailsFragmentDoc}
 ${VariantAttributeFragmentDoc}`;
 export const ProductMediaFragmentDoc = gql`
@@ -15905,6 +15909,7 @@ export const ProductTypeDocument = gql`
       ) {
         ...AttributeValueList
       }
+      ...Metadata
     }
     taxClass {
       id
@@ -15912,7 +15917,8 @@ export const ProductTypeDocument = gql`
     }
   }
 }
-    ${AttributeValueListFragmentDoc}`;
+    ${AttributeValueListFragmentDoc}
+${MetadataFragmentDoc}`;
 
 /**
  * __useProductTypeQuery__

@@ -1,5 +1,6 @@
 import { NumericUnits } from "@dashboard/attributes/components/AttributeDetails/NumericUnits";
 import { DashboardCard } from "@dashboard/components/Card";
+import ControlledCheckbox from "@dashboard/components/ControlledCheckbox";
 import FormSpacer from "@dashboard/components/FormSpacer";
 import { Select } from "@dashboard/components/Select";
 import {
@@ -11,6 +12,8 @@ import { ChangeEvent, UseFormResult } from "@dashboard/hooks/useForm";
 import { commonMessages } from "@dashboard/intl";
 import { getFormErrors } from "@dashboard/utils/errors";
 import getAttributeErrorMessage from "@dashboard/utils/errors/attribute";
+import { updateAtIndex } from "@dashboard/utils/lists";
+import { getMetadataValueAsBool } from "@dashboard/utils/metadata/getMetadataValue";
 import { TextField } from "@material-ui/core";
 import { Box, Checkbox, Text } from "@saleor/macaw-ui-next";
 import React from "react";
@@ -119,6 +122,23 @@ const AttributeDetails: React.FC<AttributeDetailsProps> = props => {
     apiErrors,
   );
 
+  const onChangePhantomField = (valueTransformer: (val: any) => string) => (event: ChangeEvent) => {
+    const key = event.target.name;
+    const fieldValue = { key, value: valueTransformer(event.target.value) };
+    const fieldIdx = data.metadata.findIndex(m => m.key === key);
+    const value =
+      fieldIdx >= 0
+        ? updateAtIndex(fieldValue, data.metadata, fieldIdx)
+        : [...data.metadata, fieldValue];
+
+    onChange({
+      target: {
+        name: "metadata",
+        value,
+      },
+    });
+  };
+
   return (
     <DashboardCard>
       <DashboardCard.Header>
@@ -200,6 +220,14 @@ const AttributeDetails: React.FC<AttributeDetailsProps> = props => {
         >
           <Text fontSize={3}>{intl.formatMessage(messages.valueRequired)}</Text>
         </Checkbox>
+        {data.inputType === AttributeInputTypeEnum.DROPDOWN && (
+          <ControlledCheckbox
+            name={"allowCustomValues"}
+            label={"Allow Custom Values"}
+            checked={getMetadataValueAsBool(data.metadata, "allowCustomValues") ?? true}
+            onChange={onChangePhantomField(val => (val ? "true" : "false"))}
+          />
+        )}
         {data.inputType === AttributeInputTypeEnum.NUMERIC && (
           <NumericUnits
             data={data}
