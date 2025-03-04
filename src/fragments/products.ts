@@ -150,6 +150,7 @@ export const productVariantAttributesFragment = gql`
         ) {
           ...AttributeValueList
         }
+        ...Metadata
       }
       values {
         ...AttributeValueDetails
@@ -260,6 +261,7 @@ export const variantAttributeFragment = gql`
     choices(first: $firstValues, after: $afterValues, last: $lastValues, before: $beforeValues) {
       ...AttributeValueList
     }
+    ...Metadata
   }
 `;
 

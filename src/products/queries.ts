@@ -101,6 +101,7 @@ export const productTypeQuery = gql`
         ) {
           ...AttributeValueList
         }
+        ...Metadata
       }
       taxClass {
         id

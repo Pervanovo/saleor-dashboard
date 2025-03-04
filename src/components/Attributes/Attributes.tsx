@@ -26,6 +26,7 @@ export interface AttributeInputData {
   unit?: MeasurementUnitsEnum | null;
   variantAttributeScope?: VariantAttributeScope;
   isRequired: boolean;
+  allowCustomValues?: boolean;
   values: AttributeValueDetailsFragment[];
   selectedValues?: AttributeValueDetailsFragment[];
   references?: AttributeReference[];
