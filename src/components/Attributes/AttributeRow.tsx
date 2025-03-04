@@ -92,7 +92,7 @@ const AttributeRow: React.FC<AttributeRowProps> = ({
       return (
         <BasicAttributeRow label={attribute.label}>
           <Combobox
-            allowCustomValues
+            allowCustomValues={attribute.data.allowCustomValues ?? true}
             alwaysFetchOnFocus
             size="small"
             disabled={disabled}
