@@ -83,6 +83,8 @@ export const product: (
             },
           ],
         },
+        metadata: [],
+        privateMetadata: [],
       },
       values: [
         {
@@ -196,6 +198,8 @@ export const product: (
             },
           ],
         },
+        metadata: [],
+        privateMetadata: [],
       },
       values: [
         {
@@ -363,6 +367,8 @@ export const product: (
             },
           ],
         },
+        metadata: [],
+        privateMetadata: [],
       },
     ],
     selectionVariantAttributes: [
@@ -423,6 +429,8 @@ export const product: (
             },
           ],
         },
+        metadata: [],
+        privateMetadata: [],
       },
     ],
     taxClass: {
@@ -474,6 +482,8 @@ export const product: (
             },
           ],
         },
+        metadata: [],
+        privateMetadata: [],
       },
       {
         __typename: "Attribute",
@@ -532,6 +542,8 @@ export const product: (
             },
           ],
         },
+        metadata: [],
+        privateMetadata: [],
       },
     ],
   },
@@ -3663,6 +3675,8 @@ export const variant = (placeholderImage: string): ProductVariantFragment => ({
             },
           ],
         },
+        metadata: [],
+        privateMetadata: [],
       },
       values: [
         {
@@ -3928,6 +3942,8 @@ export const variant = (placeholderImage: string): ProductVariantFragment => ({
             },
           ],
         },
+        metadata: [],
+        privateMetadata: [],
       },
       values: [
         {
@@ -4041,6 +4057,8 @@ export const variant = (placeholderImage: string): ProductVariantFragment => ({
             },
           ],
         },
+        metadata: [],
+        privateMetadata: [],
       },
       values: [
         {
@@ -4292,6 +4310,8 @@ export const variantAttributes: VariantAttributeFragment[] = [
       },
       edges: [],
     },
+    metadata: [],
+    privateMetadata: [],
   },
   {
     __typename: "Attribute",
@@ -4313,5 +4333,7 @@ export const variantAttributes: VariantAttributeFragment[] = [
       },
       edges: [],
     },
+    metadata: [],
+    privateMetadata: [],
   },
 ];
