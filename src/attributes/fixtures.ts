@@ -147,6 +147,8 @@ export const attributes: Array<
       ],
     },
     visibleInStorefront: true,
+    metadata: [],
+    privateMetadata: [],
   },
   {
     __typename: "Attribute" as const,
@@ -249,6 +251,8 @@ export const attributes: Array<
       ],
     },
     visibleInStorefront: false,
+    metadata: [],
+    privateMetadata: [],
   },
   {
     __typename: "Attribute" as const,
@@ -294,6 +298,8 @@ export const attributes: Array<
       ],
     },
     visibleInStorefront: false,
+    metadata: [],
+    privateMetadata: [],
   },
   {
     __typename: "Attribute" as const,
@@ -377,6 +383,8 @@ export const attributes: Array<
       ],
     },
     visibleInStorefront: false,
+    metadata: [],
+    privateMetadata: [],
   },
   {
     __typename: "Attribute" as const,
@@ -441,6 +449,8 @@ export const attributes: Array<
       ],
     },
     visibleInStorefront: true,
+    metadata: [],
+    privateMetadata: [],
   },
   {
     __typename: "Attribute" as const,
@@ -524,6 +534,8 @@ export const attributes: Array<
       ],
     },
     visibleInStorefront: true,
+    metadata: [],
+    privateMetadata: [],
   },
   {
     __typename: "Attribute" as const,
@@ -588,6 +600,8 @@ export const attributes: Array<
       ],
     },
     visibleInStorefront: true,
+    metadata: [],
+    privateMetadata: [],
   },
   {
     __typename: "Attribute" as const,
@@ -728,6 +742,8 @@ export const attributes: Array<
       ],
     },
     visibleInStorefront: false,
+    metadata: [],
+    privateMetadata: [],
   },
   {
     __typename: "Attribute" as const,
@@ -792,6 +808,8 @@ export const attributes: Array<
       ],
     },
     visibleInStorefront: true,
+    metadata: [],
+    privateMetadata: [],
   },
   {
     __typename: "Attribute" as const,
@@ -856,6 +874,8 @@ export const attributes: Array<
       ],
     },
     visibleInStorefront: true,
+    metadata: [],
+    privateMetadata: [],
   },
   {
     __typename: "Attribute" as const,
@@ -920,6 +940,8 @@ export const attributes: Array<
       ],
     },
     visibleInStorefront: true,
+    metadata: [],
+    privateMetadata: [],
   },
   {
     __typename: "Attribute" as const,
@@ -1060,5 +1082,7 @@ export const attributes: Array<
       ],
     },
     visibleInStorefront: true,
+    metadata: [],
+    privateMetadata: [],
   },
 ];
