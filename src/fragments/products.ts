@@ -181,6 +181,8 @@ export const productDetailsVariant = gql`
       attribute {
         id
         name
+        valueRequired
+        ...Metadata
       }
       values {
         ...AttributeValueDetails
