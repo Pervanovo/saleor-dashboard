@@ -587,6 +587,9 @@ export const product: (
             id: "QXR0cmlidXRlOjE1",
             name: "Bottle Size",
             __typename: "Attribute",
+            valueRequired: false,
+            metadata: [],
+            privateMetadata: [],
           },
           values: [
             {
@@ -755,6 +758,9 @@ export const product: (
             id: "QXR0cmlidXRlOjE1",
             name: "Bottle Size",
             __typename: "Attribute",
+            valueRequired: false,
+            metadata: [],
+            privateMetadata: [],
           },
           values: [
             {
@@ -856,6 +862,9 @@ export const product: (
             id: "QXR0cmlidXRlOjE1",
             name: "Bottle Size",
             __typename: "Attribute",
+            valueRequired: false,
+            metadata: [],
+            privateMetadata: [],
           },
           values: [
             {
@@ -1024,6 +1033,9 @@ export const product: (
             id: "QXR0cmlidXRlOjE2",
             name: "Bottle Size",
             __typename: "Attribute",
+            valueRequired: false,
+            metadata: [],
+            privateMetadata: [],
           },
           values: [
             {
@@ -1112,6 +1124,9 @@ export const product: (
             id: "QXR0cmlidXRlOjE3",
             name: "Bottle Size",
             __typename: "Attribute",
+            valueRequired: false,
+            metadata: [],
+            privateMetadata: [],
           },
           values: [
             {

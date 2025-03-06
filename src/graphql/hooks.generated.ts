@@ -2769,6 +2769,8 @@ export const ProductDetailsVariantFragmentDoc = gql`
     attribute {
       id
       name
+      valueRequired
+      ...Metadata
     }
     values {
       ...AttributeValueDetails
@@ -2789,7 +2791,8 @@ export const ProductDetailsVariantFragmentDoc = gql`
   }
   quantityLimitPerCustomer
 }
-    ${AttributeValueDetailsFragmentDoc}
+    ${MetadataFragmentDoc}
+${AttributeValueDetailsFragmentDoc}
 ${StockFragmentDoc}
 ${PreorderFragmentDoc}
 ${ChannelListingProductVariantFragmentDoc}`;
