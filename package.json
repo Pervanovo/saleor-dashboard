@@ -67,6 +67,7 @@
     "is-url": "^1.2.4",
     "jwt-decode": "^3.1.2",
     "keycode": "^2.2.1",
+    "live-server": "^1.2.2",
     "lodash": "^4.17.21",
     "marked": "^4.0.17",
     "moment-timezone": "^0.5.32",
@@ -287,6 +288,7 @@
     "qa:artifact-move-videos": "find cypress/reports/*/mochareports/videos -type f -name \"*.js.mp4\" -exec mv {} cypress/reports/mochareports/videos \\;",
     "qa:pw-e2e": "npx playwright test --grep \"#e2e\"",
     "qa:pw-ui": "npx playwright test --ui",
+    "serve-build": "npx dotenv-cli node ./serve-build.js",
     "knip": "knip --reporter markdown",
     "knip:fix": "knip --fix"
   },
