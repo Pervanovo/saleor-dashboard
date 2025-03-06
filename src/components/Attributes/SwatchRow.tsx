@@ -48,7 +48,7 @@ export const SwatchRow: React.FC<SwatchRowProps> = ({
   );
 
   return (
-    <BasicAttributeRow label={attribute.label}>
+    <BasicAttributeRow label={attribute.label} required={attribute.data.isRequired}>
       <Combobox
         disabled={disabled}
         options={options}

@@ -1,3 +1,4 @@
+import RequiredFieldLabel from "@dashboard/components/Attributes/RequiredFieldLabel";
 import { Box, InfoIcon, sprinkles, Text, Tooltip } from "@saleor/macaw-ui-next";
 import React from "react";
 
@@ -6,6 +7,7 @@ interface BasicAttributeRowProps {
   description?: string | React.ReactNode;
   id?: string;
   clickableLabel?: boolean;
+  required?: boolean;
 }
 
 const capitalize = (str: BasicAttributeRowProps["label"]) =>
@@ -15,6 +17,7 @@ export const BasicAttributeRow: React.FC<BasicAttributeRowProps> = ({
   label,
   description,
   children,
+  required,
   id,
   clickableLabel = false,
 }) => (
@@ -37,6 +40,7 @@ export const BasicAttributeRow: React.FC<BasicAttributeRowProps> = ({
       cursor={clickableLabel ? "pointer" : "auto"}
     >
       <Text>{capitalize(label)}</Text>
+      <RequiredFieldLabel required={required ?? false} />
       {description && (
         <Tooltip>
           <Tooltip.Trigger>
