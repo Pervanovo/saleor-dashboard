@@ -55,6 +55,7 @@ const AttributeRow: React.FC<AttributeRowProps> = ({
           selectLabel={intl.formatMessage(attributeRowMessages.reference)}
           onSelect={() => onReferencesAddClick(attribute)}
           disabled={disabled}
+          required={attribute.data.isRequired}
         >
           <SortableChipsField
             values={getReferenceDisplayValue(attribute)}
@@ -73,7 +74,7 @@ const AttributeRow: React.FC<AttributeRowProps> = ({
       );
     case AttributeInputTypeEnum.FILE:
       return (
-        <BasicAttributeRow label={attribute.label}>
+        <BasicAttributeRow label={attribute.label} required={attribute.data.isRequired}>
           <FileUploadField
             disabled={disabled}
             loading={loading}
@@ -90,7 +91,7 @@ const AttributeRow: React.FC<AttributeRowProps> = ({
       );
     case AttributeInputTypeEnum.DROPDOWN:
       return (
-        <BasicAttributeRow label={attribute.label}>
+        <BasicAttributeRow label={attribute.label} required={attribute.data.isRequired}>
           <Combobox
             allowCustomValues={attribute.data.allowCustomValues ?? true}
             alwaysFetchOnFocus
@@ -143,6 +144,7 @@ const AttributeRow: React.FC<AttributeRowProps> = ({
         <BasicAttributeRow
           label={attribute.label}
           description={intl.formatMessage(inputTypeMessages.plainText)}
+          required={attribute.data.isRequired}
         >
           <Input
             disabled={isTooLong || disabled}
@@ -173,6 +175,7 @@ const AttributeRow: React.FC<AttributeRowProps> = ({
         <BasicAttributeRow
           label={attribute.label}
           description={intl.formatMessage(inputTypeMessages.richText)}
+          required={attribute.data.isRequired}
         >
           {getShouldMount(attribute.id) && (
             <Box __minWidth={210}>
@@ -194,7 +197,7 @@ const AttributeRow: React.FC<AttributeRowProps> = ({
     }
     case AttributeInputTypeEnum.NUMERIC:
       return (
-        <BasicAttributeRow label={attribute.label}>
+        <BasicAttributeRow label={attribute.label} required={attribute.data.isRequired}>
           <Input
             disabled={disabled}
             error={!!error}
@@ -211,7 +214,7 @@ const AttributeRow: React.FC<AttributeRowProps> = ({
       );
     case AttributeInputTypeEnum.BOOLEAN:
       return (
-        <BasicAttributeRow label={attribute.label}>
+        <BasicAttributeRow label={attribute.label} required={attribute.data.isRequired}>
           <Box
             as="li"
             display="flex"
@@ -242,7 +245,7 @@ const AttributeRow: React.FC<AttributeRowProps> = ({
       );
     case AttributeInputTypeEnum.DATE:
       return (
-        <BasicAttributeRow label={attribute.label}>
+        <BasicAttributeRow label={attribute.label} required={attribute.data.isRequired}>
           <Input
             width="100%"
             disabled={disabled}
@@ -258,7 +261,7 @@ const AttributeRow: React.FC<AttributeRowProps> = ({
       );
     case AttributeInputTypeEnum.DATE_TIME:
       return (
-        <BasicAttributeRow label={attribute.label}>
+        <BasicAttributeRow label={attribute.label} required={attribute.data.isRequired}>
           <DateTimeField
             name={`attribute:${attribute.label}`}
             disabled={disabled}
@@ -270,7 +273,7 @@ const AttributeRow: React.FC<AttributeRowProps> = ({
       );
     default:
       return (
-        <BasicAttributeRow label={attribute.label}>
+        <BasicAttributeRow label={attribute.label} required={attribute.data.isRequired}>
           <Multiselect
             allowCustomValues
             alwaysFetchOnFocus

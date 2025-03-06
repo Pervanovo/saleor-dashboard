@@ -1,3 +1,4 @@
+import RequiredFieldLabel from "@dashboard/components/Attributes/RequiredFieldLabel";
 import { Box, Button, Text } from "@saleor/macaw-ui-next";
 import React from "react";
 
@@ -6,10 +7,11 @@ interface ExtendedAttributeRowProps {
   selectLabel: string;
   disabled: boolean;
   onSelect: () => void;
+  required?: boolean;
 }
 
 const ExtendedAttributeRow: React.FC<ExtendedAttributeRowProps> = props => {
-  const { label, selectLabel, disabled, onSelect, children } = props;
+  const { label, selectLabel, disabled, onSelect, required, children } = props;
 
   return (
     <>
@@ -23,6 +25,7 @@ const ExtendedAttributeRow: React.FC<ExtendedAttributeRowProps> = props => {
         gap={5}
       >
         <Text data-test-id="attribute-label">{label}</Text>
+        <RequiredFieldLabel required={required ?? false} />
         <Button
           disabled={disabled}
           variant="secondary"
