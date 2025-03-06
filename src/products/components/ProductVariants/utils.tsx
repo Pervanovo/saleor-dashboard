@@ -14,6 +14,7 @@ import { AvailableColumn } from "@dashboard/components/Datagrid/types";
 import { ProductDetailsVariantFragment } from "@dashboard/graphql";
 import { ProductVariantListError } from "@dashboard/products/views/ProductUpdate/handlers/errors";
 import { mapNodeToChoice } from "@dashboard/utils/maps";
+import { getMetadataValueAsBool } from "@dashboard/utils/metadata/getMetadataValue";
 import { GridCell } from "@glideapps/glide-data-grid";
 import { Option } from "@saleor/macaw-ui-next";
 import { MutableRefObject } from "react";
@@ -151,18 +152,17 @@ export function getData({
   }
 
   if (getColumnAttribute(columnId)) {
-    const value =
-      change?.value ??
-      mapNodeToChoice(
-        dataRow?.attributes.find(
-          attribute => attribute.attribute.id === getColumnAttribute(columnId),
-        )?.values,
-      )[0] ??
-      emptyDropdownCellValue;
+    const attribute = dataRow?.attributes.find(
+      attribute => attribute.attribute.id === getColumnAttribute(columnId),
+    );
+    const value = change?.value ?? mapNodeToChoice(attribute?.values)[0] ?? emptyDropdownCellValue;
+    const required = attribute?.attribute?.valueRequired ?? false;
+    const allowCustomValues =
+      getMetadataValueAsBool(attribute?.attribute?.metadata ?? [], "allowCustomValues") ?? true;
 
     return dropdownCell(value, {
-      allowCustomValues: true,
-      emptyOption: true,
+      allowCustomValues,
+      emptyOption: !required,
       update: text => searchAttributeValues(getColumnAttribute(columnId), text),
     });
   }
