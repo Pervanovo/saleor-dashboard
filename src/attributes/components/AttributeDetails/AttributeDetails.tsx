@@ -1,12 +1,12 @@
 import { NumericUnits } from "@dashboard/attributes/components/AttributeDetails/NumericUnits";
 import { DashboardCard } from "@dashboard/components/Card";
-import ControlledCheckbox from "@dashboard/components/ControlledCheckbox";
 import FormSpacer from "@dashboard/components/FormSpacer";
 import { Select } from "@dashboard/components/Select";
 import {
   AttributeEntityTypeEnum,
   AttributeErrorFragment,
   AttributeInputTypeEnum,
+  MetadataInput,
 } from "@dashboard/graphql";
 import { ChangeEvent, UseFormResult } from "@dashboard/hooks/useForm";
 import { commonMessages } from "@dashboard/intl";
@@ -122,11 +122,10 @@ const AttributeDetails: React.FC<AttributeDetailsProps> = props => {
     apiErrors,
   );
 
-  const onChangePhantomField = (valueTransformer: (val: any) => string) => (event: ChangeEvent) => {
-    const key = event.target.name;
-    const fieldValue = { key, value: valueTransformer(event.target.value) };
+  const changeMetadataField = (key: string, value: string) => {
+    const fieldValue = { key, value };
     const fieldIdx = data.metadata.findIndex(m => m.key === key);
-    const value =
+    const newValue: MetadataInput[] =
       fieldIdx >= 0
         ? updateAtIndex(fieldValue, data.metadata, fieldIdx)
         : [...data.metadata, fieldValue];
@@ -134,7 +133,7 @@ const AttributeDetails: React.FC<AttributeDetailsProps> = props => {
     onChange({
       target: {
         name: "metadata",
-        value,
+        value: newValue,
       },
     });
   };
@@ -221,12 +220,15 @@ const AttributeDetails: React.FC<AttributeDetailsProps> = props => {
           <Text fontSize={3}>{intl.formatMessage(messages.valueRequired)}</Text>
         </Checkbox>
         {data.inputType === AttributeInputTypeEnum.DROPDOWN && (
-          <ControlledCheckbox
+          <Checkbox
             name={"allowCustomValues"}
-            label={"Allow Custom Values"}
             checked={getMetadataValueAsBool(data.metadata, "allowCustomValues") ?? true}
-            onChange={onChangePhantomField(val => (val ? "true" : "false"))}
-          />
+            onCheckedChange={checked =>
+              changeMetadataField("allowCustomValues", checked === true ? "true" : "false")
+            }
+          >
+            <Text fontSize={3}>{"Allow Custom Values"}</Text>
+          </Checkbox>
         )}
         {data.inputType === AttributeInputTypeEnum.NUMERIC && (
           <NumericUnits
